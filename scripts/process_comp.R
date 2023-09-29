@@ -44,7 +44,7 @@ dat_mass <- dat %>% mutate(pro.n_dry = n_dry * 6.25, across(comps_dm, function(x
 dat_mass$RFd <- dat_mass$ndf - dat_mass$indf
 comps_dm <- c(comps_dm, 'RFd') 
 
-dat_grouped <- dat_mass %>% filter(reactor != 1) %>% select(c(comps_dm, comps_slurry, dm_used, dm_calc, day, reactor, temp, pH)) %>% mutate(RFd = ndf - lig) %>% group_by(temp, day) %>% 
+dat_grouped <- dat_mass %>% filter(reactor != 1) %>% select(c(comps_dm, comps_slurry, dm_used, dm_calc, day, reactor, temp, pH)) %>% group_by(temp, day) %>% 
   summarise(across(-c('reactor'), .fns = list(Mean = mean, SD = sd), na.rm = TRUE))
 
 
